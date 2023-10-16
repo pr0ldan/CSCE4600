@@ -207,7 +207,43 @@ func SJFPrioritySchedule(w io.Writer, title string, processes []Process) {
 }
 
 //
-//func SJFSchedule(w io.Writer, title string, processes []Process) { }
+//func SJFSchedule(w io.Writer, title string, processes []Process) {
+// 	currentTime := 0
+//     totalTurnaroundTime := 0
+//     totalWaitingTime := 0
+//     completedProcesses := 0
+//     for completedProcesses < len(processes) {
+//         runnableProcesses := make([]Process, 0)
+//         for i, process := range processes {
+//             if process.ArrivalTime <= currentTime && process.Remaining > 0 {
+//                 runnableProcesses = append(runnableProcesses, processes[i])
+//             }
+//         }
+//         if len(runnableProcesses) == 0 {
+//             currentTime++
+//             continue
+//         }
+//         sort.SliceStable(runnableProcesses, func(i, j int) bool {
+//             if runnableProcesses[i].Remaining != runnableProcesses[j].Remaining {
+//                 return runnableProcesses[i].Remaining < runnableProcesses[j].Remaining
+//             }
+//             return runnableProcesses[i].Priority < runnableProcesses[j].Priority
+//         })
+//         process := &runnableProcesses[0]
+//         process.Remaining--
+//         if process.Remaining == 0 {
+//             completedProcesses++
+//             process.Turnaround = currentTime + 1 - process.ArrivalTime
+//             process.WaitingTime = process.Turnaround - process.BurstTime
+//             totalTurnaroundTime += process.Turnaround
+//             totalWaitingTime += process.WaitingTime
+//         }
+//         currentTime++
+//     }
+//     aveTurnaround := float64(totalTurnaroundTime) / float64(len(processes))
+//     aveWait := float64(totalWaitingTime) / float64(len(processes))
+//     aveThroughput := float64(len(processes)) / float64(currentTime)
+// }
 //
 //func RRSchedule(w io.Writer, title string, processes []Process) { }
 
