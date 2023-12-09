@@ -1,10 +1,12 @@
+// builtins/let.go
 package builtins
 
 import (
 	"fmt"
 	"io"
-	"strconv"
 	"strings"
+
+	"github.com/Knetic/govaluate"
 )
 
 // Let evaluates arithmetic expressions and prints the result.
@@ -17,13 +19,19 @@ func Let(w io.Writer, args ...string) error {
 	// Concatenate the expressions into a single string.
 	combinedExpr := strings.Join(args, " ")
 
-	// Evaluate the combined expression using the strconv package.
-	result, err := strconv.Atoi(combinedExpr)
+	// Evaluate the combined expression using govaluate.
+	expression, err := govaluate.NewEvaluableExpression(combinedExpr)
 	if err != nil {
 		fmt.Fprintf(w, "Error: %s\n", err)
 		return err
 	}
 
-	fmt.Fprintf(w, "%d\n", result)
+	result, err := expression.Evaluate(nil)
+	if err != nil {
+		fmt.Fprintf(w, "Error: %s\n", err)
+		return err
+	}
+
+	fmt.Fprintf(w, "%v\n", result)
 	return nil
 }
