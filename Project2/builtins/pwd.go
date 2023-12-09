@@ -1,4 +1,3 @@
-// builtins/pwd.go
 package builtins
 
 import (
