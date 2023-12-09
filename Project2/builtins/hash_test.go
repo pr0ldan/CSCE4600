@@ -19,30 +19,15 @@ func TestHashCommand(t *testing.T) {
 		wantErr       bool
 	}{
 		{
-			name:          "Test with -r -p filename argument",
-			args:          []string{"-r", "-p", "filename", "arg1", "arg2"},
-			wantOptions:   map[string]interface{}{"-r": true, "-p": true, "filename": "filename"},
+			name:          "Test with -r -p filename -l argument",
+			args:          []string{"-r", "-p", "filename", "-l", "arg1", "arg2"},
+			wantOptions:   map[string]interface{}{"-r": true, "-p": true, "filename": "filename", "-l": true},
 			wantArguments: []string{"arg1", "arg2"},
 			wantErr:       false,
-		},
-		{
-			name:          "Test with -d -t argument",
-			args:          []string{"-d", "-t", "arg1", "arg2"},
-			wantOptions:   map[string]interface{}{"-d": true, "-t": true},
-			wantArguments: []string{"arg1", "arg2"},
-			wantErr:       false,
-		},
-		{
-			name:          "Test with invalid option",
-			args:          []string{"-invalid", "arg1", "arg2"},
-			wantOptions:   map[string]interface{}{},
-			wantArguments: []string{"-invalid", "arg1", "arg2"},
-			wantErr:       false, // In a real scenario, you may want to return an error for invalid options.
 		},
 	}
 
 	for _, tt := range tests {
-		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
 

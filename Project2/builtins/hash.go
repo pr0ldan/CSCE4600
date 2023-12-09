@@ -22,7 +22,7 @@ func parseHashOptions(args []string) map[string]interface{} {
 
 	for i := 0; i < len(args); i++ {
 		switch args[i] {
-		case "-r", "-d", "-t":
+		case "-r", "-d", "-t", "-l":
 			options[args[i]] = true
 		case "-p":
 			options["-p"] = true
