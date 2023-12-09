@@ -80,6 +80,8 @@ func handleInput(w io.Writer, input string, exit chan<- struct{}) error {
 		return builtins.EnvironmentVariables(w, args...)
 	case "pwd":
 		return builtins.PrintWorkingDirectory(w, args...)
+	case "times":
+		return builtins.TimesCommand(args...)
 	case "exit":
 		exit <- struct{}{}
 		return nil
