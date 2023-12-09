@@ -82,6 +82,8 @@ func handleInput(w io.Writer, input string, exit chan<- struct{}) error {
 		return builtins.PrintWorkingDirectory(w, args...)
 	case "times":
 		return builtins.TimesCommand(args...)
+	case "hash":
+		return builtins.HashCommand(args...)
 	case "exit":
 		exit <- struct{}{}
 		return nil
