@@ -16,12 +16,10 @@ Available built-in commands:
 - pwd: Print pathname of current working directory.
 - times: Print system times used.
 - hash: Store pathnames of command arguments.
-		hash [-r] [-p filename] [-dt] [name]
-		-p inhibits path search
-		-r forget all locations
-		-d forget remembered location of each name
-		-t prints full pathname of corresponding name
-		-l print remembered commands
+		hash [-r] [-p filename] [name] [-l]
+		-p [filename] Load previously remembered pathnames from a file
+  		-l Print the current hash table
+  		-r Remove the specified commands from the hash table
 - let: Perform arithmetic operation and print.
 - echo: Print statements. 
 - exit: Exit the shell.
@@ -55,7 +53,7 @@ Examples:
 			fmt.Fprintln(w, "Usage: times")
 		case "hash":
 			fmt.Fprintln(w, "hash: Store pathnames of command arguments.")
-			fmt.Fprintln(w, "Usage: hash [-p filename]")
+			fmt.Fprintln(w, "Usage: hash [options] [name]")
 		case "let":
 			fmt.Fprintln(w, "let: Perform arithmetic operation and print.")
 			fmt.Fprintln(w, "Usage: let [expression]")

@@ -31,11 +31,17 @@ func HashCommand(args ...string) error {
 		return nil
 	}
 
+	// Print the current hash table if -l is specified.
+	if val, exists := options["-l"]; exists && val == true {
+		printHashTable()
+		return nil
+	}
+
 	// Process name arguments and update the hash table.
 	for _, name := range arguments {
-		// If -l is specified, print the current mapping.
-		if val, exists := options["-l"]; exists && val == true {
-			printHash(name)
+		// If -r is specified, remove the entry from the hash table.
+		if val, exists := options["-r"]; exists && val == true {
+			removeHashEntry(name)
 		} else {
 			// Search for the full path of the command and update the hash table.
 			fullPath, err := searchCommand(name)
@@ -45,10 +51,6 @@ func HashCommand(args ...string) error {
 			updateHash(name, fullPath)
 		}
 	}
-
-	// For simplicity, let's print the parsed options and arguments.
-	fmt.Printf("Options: %+v\n", parseHashOptions(args))
-	fmt.Printf("Arguments: %+v\n", parseHashArguments(args))
 
 	return nil
 }
@@ -85,6 +87,14 @@ func parseHashArguments(args []string) []string {
 	}
 
 	return arguments
+}
+
+// removeHashEntry removes an entry from the hash table.
+func removeHashEntry(name string) {
+	mutex.Lock()
+	defer mutex.Unlock()
+
+	delete(hashTable, name)
 }
 
 // searchCommand searches for the full path of a command in $PATH.
@@ -134,4 +144,15 @@ func printHash(name string) {
 // updateHash updates the hash table with the full path of a command.
 func updateHash(name, fullPath string) {
 	hashTable[name] = fullPath
+}
+
+// printHashTable prints the current hash table.
+func printHashTable() {
+	mutex.Lock()
+	defer mutex.Unlock()
+
+	fmt.Println("Current Hash Table:")
+	for name, path := range hashTable {
+		fmt.Printf("%s: %s\n", name, path)
+	}
 }
