@@ -35,3 +35,8 @@ As an example, two shell builtins have already been added to the package builtin
       - "github.com/jh125486/CSCE4600/Project2/builtins" changes to "github.com/CoolStudent123/CSCE4600/Project2/builtins"
 
 3. Start editing the `main.go` command switch (lines 57-64) and the package `builtins` with your chosen commands.
+
+
+## COMPILING
+To compile, make sure you are in folder Project2 within CSCE4600, or cd Project2.
+To run type "go run main.go" no quotations.
