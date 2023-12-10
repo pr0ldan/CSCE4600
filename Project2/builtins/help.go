@@ -22,6 +22,8 @@ Available built-in commands:
 		-d forget remembered location of each name
 		-t prints full pathname of corresponding name
 		-l print remembered commands
+- let: Perform arithmetic operation and print.
+- echo: Print statements. 
 - exit: Exit the shell.
 - help: Show help information.
 
@@ -54,6 +56,12 @@ Examples:
 		case "hash":
 			fmt.Fprintln(w, "hash: Store pathnames of command arguments.")
 			fmt.Fprintln(w, "Usage: hash [-p filename]")
+		case "let":
+			fmt.Fprintln(w, "let: Perform arithmetic operation and print.")
+			fmt.Fprintln(w, "Usage: let [expression]")
+		case "echo":
+			fmt.Fprintln(w, "echo: Print statements following echo command")
+			fmt.Fprintln(w, "Usage: echo [statement]")
 		case "exit":
 			fmt.Fprintln(w, "exit: Exit the shell.")
 			fmt.Fprintln(w, "Usage: exit")

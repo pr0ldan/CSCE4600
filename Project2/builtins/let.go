@@ -12,7 +12,7 @@ import (
 // Let evaluates arithmetic expressions and prints the result.
 func Let(w io.Writer, args ...string) error {
 	if len(args) == 0 {
-		fmt.Fprintln(w, "Usage: let expression [expression ...]")
+		fmt.Fprintln(w, "Usage: let [expression]")
 		return nil
 	}
 
