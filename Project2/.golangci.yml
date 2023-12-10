@@ -1,0 +1,13 @@
+run:
+  issues-exit-code: 1
+  tests: true
+  linters:
+    enable:
+      - deadcode
+      - golint
+    disable:
+      - govet
+  golint:
+    min-confidence: 0.8
+  exclude:
+    - generated/
